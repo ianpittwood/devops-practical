@@ -1,0 +1,8 @@
+node_modules/
+test/
+README.md
+.env.example
+.eslintignore
+.eslintrc
+.gitignore
+npm-debug.log
