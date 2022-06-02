@@ -1,14 +1,20 @@
-FROM node:12-alpine
+FROM keymetrics/pm2:12-alpine
 ARG PROJECT="devops-practical"
 ARG PROJECT_DIR="/opt/${PROJECT}"
 
-ENV MONGODB_URL="mongodb://localhost:27017/database"
+ENV DATABASE_USER="test_user"
+ENV DATABASE_PASSWORD="test_password"
+ENV DATABASE_HOST="localhost"
+ENV DATABASE_PORT="27017"
+ENV DATABASE_NAME="database"
+ENV NODE_ENV="development"
+ENV ENTRYPOINT_PATH="${PROJECT_DIR}/entrypoint.sh"
 
 RUN mkdir -p $PROJECT_DIR/node_modules
 WORKDIR $PROJECT_DIR
 COPY package*.json ./
-RUN npm install -g npm@latest && npm ci --only=production
+RUN npm install -g npm@latest && npm install
 COPY . .
 
 EXPOSE 3000
-CMD [ "npm", "run", "prod" ]
+CMD [ "/bin/sh", "entrypoint.sh" ]

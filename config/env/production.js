@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  db: process.env.MONGODB_URL,
+  db: "mongodb://" + process.env.DATABASE_USER + ":" + process.env.DATABASE_PASSWORD + "@" + process.env.DATABASE_HOST + ":" + (process.env.DATABASE_PORT || "27017") + "/" + process.env.DATABASE_NAME,
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,
